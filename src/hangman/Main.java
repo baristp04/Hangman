@@ -32,6 +32,7 @@ public class Main {
 
 			if (!word.contains(line) || cencored.contains(line)) {
 				count++;
+				System.out.println("False!");
 			}
 
 			for (int i = 0; i < word.length(); i++) {
@@ -46,11 +47,11 @@ public class Main {
 		}
 
 		if (cencored.contains("*")) {
-			System.out.println("Hangman is failed :(");
+			System.out.println("You've failed to find the word " + word);
 		}
 
 		else {
-			System.out.println("Hangman is succesful!");
+			System.out.println("You've succeed in finding the word " + word);
 		}
 
 		scan.close();
