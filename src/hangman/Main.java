@@ -27,7 +27,7 @@ public class Main {
 		while (cencored.contains("*") && count != 7) {
 
 			System.out.println("Guess a letter: ");
-			String line = scan.next();
+			String line = scan.next().substring(0,1);;
 			char letter = line.charAt(0);
 
 			if (!word.contains(line) || cencored.contains(line)) {
