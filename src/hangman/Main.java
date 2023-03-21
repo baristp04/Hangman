@@ -1,14 +1,24 @@
 package hangman;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
+
+		System.out.println();
 
 		Scanner scan = new Scanner(System.in);
-		String[] words = { "hangman", "bat", "java", "coding", "lesson", "python", "design", "graphic", "unity","unreal engine"};
-		String word = words[new Random().nextInt(words.length)];
+		Scanner reader = new Scanner(new File("C:\\Users\\mtepe\\OneDrive\\Masaüstü\\words.txt"));
+		List<String> words = new ArrayList<>();
+		
+		while (reader.hasNextLine()) {
+			words.add(reader.nextLine());
+		}
+		
+		String word = words.get(new Random().nextInt(words.size()));
 		String cencored = "";
 
 		for (int i = 0; i < word.length(); i++) {
@@ -24,15 +34,37 @@ public class Main {
 
 		int count = 0;
 
-		while (cencored.contains("*") && count != 7) {
+		while (cencored.contains("*") && count != 6) {
 
 			System.out.println("Guess a letter: ");
-			String line = scan.next().substring(0,1);;
+			String line = scan.next().substring(0, 1);
 			char letter = line.charAt(0);
 
 			if (!word.contains(line) || cencored.contains(line)) {
 				count++;
 				System.out.println("False!");
+			}
+
+			if (count >= 1) {
+				System.out.println("------------");
+				System.out.println(" |         |");
+				System.out.println(" O");
+			}
+
+			if (count >= 2) {
+				System.out.print("\\ ");
+			}
+			if (count >= 3) {
+				System.out.print("/" + "\n");
+			}
+			if (count >= 4) {
+				System.out.println(" |");
+			}
+			if (count >= 5) {
+				System.out.print("/ ");
+			}
+			if (count >= 6) {
+				System.out.print("\\");
 			}
 
 			for (int i = 0; i < word.length(); i++) {
@@ -42,6 +74,7 @@ public class Main {
 				}
 
 			}
+			System.out.println();
 			System.out.println(cencored);
 
 		}
